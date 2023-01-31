@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title%} {{ title }} {% endblock %}
+{% block content%}
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-lg-5 col-md-6 m-auto card p-4">
+            <form action="{{ request.path }}" method="POST" class="card-body">
+                {{ form.csrf_token }}
+  
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <div class="text-center">
+                    <h2>Register Hero</h2>
+                    
+                </div>
+                {% if request.path == '/cadastrar_hero' %}
+                <div class="form-group mb-3">
+                    Name:{{ form.name(class_="form-control",placeholder="Name")}}
+                </div>
+                {% endif%}
+                <div class="form-group mb-3">
+                    Discription:{{ form.discription(class_="form-control",placeholder="Discription")}}
+                </div>
+                <div class="form-group mb-3">
+                    Image:{{ form.image(class_="form-control",placeholder="Image")}}
+                </div>
+                <div class="text-center">
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-block btn-primary mb-3"> Register </button>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>
+</div>
+    {% endblock %}
